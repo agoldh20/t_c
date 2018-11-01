@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   patch '/movies/edit/:id' => 'movies#edit'
   delete '/movies/:id' => 'movies#destroy'
 
-  get '/order' => 'orders#index'
-  post '/order' => 'orders#create'
-  get '/order/:id' => 'orders#show'
+  get '/orders' => 'orders#index'
+  post '/orders' => 'orders#create'
+  get '/orders/:id' => 'orders#show'
 end

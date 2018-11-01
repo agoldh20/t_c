@@ -1,0 +1,19 @@
+<%= form_tag '/movies', method: :post do %>
+  <div>
+    <input type="text" name="title" placeholder="Movie Title">
+  </div>
+  <div>
+    <input type="text" name="rating" placeholder="Movie Rating">
+  </div>
+  <div>
+    <input type="text" name="runtime" placeholder="Movie Runtime">
+  </div>
+  <div>
+    <input type="text" name="input_times" placeholder="Movie Showtimes">
+    (seperatied by commas)
+  </div>
+
+  <div>
+    <input type="submit" value="Add Movie">
+  </div>
+<% end %>

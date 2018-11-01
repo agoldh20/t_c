@@ -1,0 +1,5 @@
+<% @movies.each do |movie| %>
+  <h3><a href="/movies/<%= movie.id %>"><%= movie.title %></a></h3>
+  <h3>Rated: <%= movie.rating %></h3>
+  <h3>Runtime: <%= movie.runtime.to_s %> min</h3>
+<% end %>

@@ -16,7 +16,9 @@ class OrdersController < ApplicationController
                   movie_id: movie_id,
                   quantity: quantity)
     
-    update_seat_count(movie_id, showtime)
+    movie = Movie.find(movie_id)
+    movie.update(showtimes: order.update_seat_count(movie_id, showtime, quantity))
+    movie.save
 
     redirect_to "/orders/#{order.id}"
   end

@@ -10,11 +10,11 @@ class MoviesController < ApplicationController
                        runtime: params[:runtime],
                        image_url: params[:image_url])
     @movie.save
-    showtimes_arr = {}
+    showtimes_hash = {}
     params[:input_times].split(",").each do |time|
-      showtimes_arr["#{time.gsub(" ", "")}"] = 20
+      showtimes_hash["#{time.gsub(" ", "")}"] = 20
     end
-    @movie.assign_attributes(showtimes: showtimes_arr)
+    @movie.assign_attributes(showtimes: showtimes_hash)
     @movie.save
 
     redirect_to "/"

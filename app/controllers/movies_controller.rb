@@ -1,6 +1,10 @@
 class MoviesController < ApplicationController
   def index
     @movies = Movie.all
+
+    if @params[:theater]
+      @movies = Movie.where()
+    end
   end
 
   def create
@@ -10,14 +14,8 @@ class MoviesController < ApplicationController
                        runtime: params[:runtime],
                        image_url: params[:image_url])
     @movie.save
-    showtimes_hash = {}
-    params[:input_times].split(",").each do |time|
-      showtimes_hash["#{time.gsub(" ", "")}"] = 20
-    end
-    @movie.assign_attributes(showtimes: showtimes_hash)
-    @movie.save
-
-    redirect_to "/"
+    new_showtime = Showtime.create(movie_id: @movie.id)
+    redirect_to "/showtimes/#{new_showtime.id}/edit"
   end
 
   def show

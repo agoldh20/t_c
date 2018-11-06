@@ -1,7 +1,7 @@
 <h1>Add/Edit Showtimes for <%= @showtimes.movie.name %></h1>
 <%= form_tag '/showtimes', method: :post do %>
   <select name="theater_id">
-    <% @suppliers.each do |supplier| %>
+    <% @theaters.each do |supplier| %>
       <option value="<%= theater.id %>" <%= 'selected="selected"' if theater.id == @movie.theater_id %>><%= theater.name %></option>
     <% end %>
   </select>

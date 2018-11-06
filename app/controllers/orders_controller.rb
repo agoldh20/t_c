@@ -5,20 +5,21 @@ class OrdersController < ApplicationController
 
   def create
     movie_id = params[:movie_id]
+    theater_id = params[:theater_id]
     showtime = params[:showtime]
+    showtime_object = Showtime.find_by(theater_id: theater_id, movie_id: movie_id)
     quantity = params[:quantity].to_i
 
     order = Order.create!(first_name: params[:first_name],
                   last_name: params[:last_name],
                   credit_card: params[:credit_card],
                   exp_date: params[:exp_date],
-                  showtime: showtime,
-                  movie_id: movie_id,
+                  time: showtime,
+                  showtime_id: showtime_object.id,
                   quantity: quantity)
     
-    movie = Movie.find(movie_id)
-    movie.update(showtimes: order.update_seat_count(movie_id, showtime, quantity))
-    movie.save
+    showtime_object.update(showtimes: order.update_seat_count(movie_id, theater_id, showtime, quantity))
+    showtime_object.save
 
     redirect_to "/orders/#{order.id}"
   end

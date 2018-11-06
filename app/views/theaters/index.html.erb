@@ -1,0 +1,7 @@
+Select Your Theater:
+<% @theaters.each do |theater| %>
+  <div>
+    <a href="/theaters/<%= theater.id %>/movies"><strong><%= theater.name %></strong></a>
+  </div>
+  <br>
+<% end %>

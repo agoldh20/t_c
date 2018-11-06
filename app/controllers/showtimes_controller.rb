@@ -8,10 +8,6 @@ class ShowtimesController < ApplicationController
   end
 
   def create
-    showtimes_hash = {}
-    params[:input_times].split(",").each do |time|
-      showtimes_hash["#{time.gsub(" ", "")}"] = params[:seat_capacity]
-    end
 
   end
 
@@ -20,7 +16,10 @@ class ShowtimesController < ApplicationController
   end
 
   def edit
-    
+    showtimes_hash = {}
+    params[:input_times].split(",").each do |time|
+      showtimes_hash["#{time.gsub(" ", "")}"] = params[:seat_capacity]
+    end
   end
 
   def destroy

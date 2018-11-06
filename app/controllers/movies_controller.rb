@@ -3,7 +3,7 @@ class MoviesController < ApplicationController
     @movies = Movie.all
 
     if @params[:theater]
-      @movies = Movie.where()
+      @movies = Theater.find(params[:theater]).movies
     end
   end
 
@@ -14,12 +14,14 @@ class MoviesController < ApplicationController
                        runtime: params[:runtime],
                        image_url: params[:image_url])
     @movie.save
-    new_showtime = Showtime.create(movie_id: @movie.id)
+    new_showtime = Showtime.new(movie_id: @movie.id)
+    new_showtime.save
     redirect_to "/showtimes/#{new_showtime.id}/edit"
   end
 
   def show
     @movie = Movie.find(params[:id])
+    @theaters = @movie.theaters
   end
 
   def update

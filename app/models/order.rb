@@ -1,8 +1,9 @@
 class Order < ApplicationRecord
-  belongs_to :movie, optional: true
+  belongs_to :showtime, optional: true
+  
 
-  def update_seat_count(movie_id, showtime, quantity)
-    current_showtimes = Movie.find(movie_id).showtimes
+  def update_seat_count(movie_id, theater_id, showtime, quantity)
+    current_showtimes = Showtime.where(theater_id: theater_id, movie_id: movie_id).pluck(:showtimes)[0]
     current_showtimes[showtime] -= quantity
     current_showtimes
   end

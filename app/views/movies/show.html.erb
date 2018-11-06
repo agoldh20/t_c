@@ -1,39 +1,9 @@
 <h2><%= @movie.title %></h2>
 <h3>Rating: <%= @movie.rating %></h3>
-<h3>Runtime: <%= @movie.runtime.to_s %></h3>
-<h3>Showtimes:</h3>
+<h3>Runtime: <%= @movie.friendly_time %></h3>
+<h3>Theaters Showing:</h3>
 <ul>
-<% @movie.showtimes.each do |time, capacity| %>
-  <li><%= time %> has <%= capacity %> seats available</li>
+<% @theaters.each do |theater| %>
+  <li><%= theater.name %></li>
 <% end %>
 </ul>
-
-<h3>Purchase a Ticket:</h3>
-<%= form_tag '/orders', method: :post do %>
-<input type="hidden" name="movie_id" value="<%= @movie.id %>">
-  <div>
-    Showtime:
-    <select name="showtime">
-      <% @movie.showtimes.each do |time, capacity| %>
-        <option value="<%= time %>"><%= time %></option>
-      <% end %>
-    </select>
-  </div>
-  <br>
-  <div>
-    <input type="text" name="first_name" placeholder="First Name" required>
-    <input type="text" name="last_name" placeholder="Last Name" required>
-  </div>
-  <div>
-    <input type="text" name="quantity" placeholder="Quantity">
-  </div>
-  <br>
-  <div>
-    <input type="text" name="credit_card" placeholder="Credit Card Number" required>
-    <input type="text" name="exp_date" placeholder="Exp. Date (MM/YY)" required>
-  </div>
-  <br>
-  <div>
-    <input type="submit" value="Purchase">
-  </div>
-<% end %>
